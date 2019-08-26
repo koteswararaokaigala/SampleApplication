@@ -50,8 +50,6 @@ GEM
     autoprefixer-rails (9.6.1.1)
       execjs
     bindex (0.8.1)
-    boostrap-sass (0.0.2)
-      bootstrap-sass
     bootsnap (1.4.4)
       msgpack (~> 1.0)
     bootstrap-sass (3.4.1)
@@ -203,9 +201,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  boostrap-sass (~> 0.0.2)
   bootsnap (>= 1.1.0)
-  bootstrap-sass
+  bootstrap-sass (~> 3.4, >= 3.4.1)
   byebug
   capybara (>= 2.15)
   chromedriver-helper
