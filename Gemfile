@@ -5,7 +5,7 @@ ruby '2.4.5'
 
 gem 'rails', '~> 5.2.3'
 gem 'pg'
-gem 'simple_form', '~> 4.1'
+gem 'simple_form', '~> 5.0'
 gem 'bootstrap-sass', '~> 3.4', '>= 3.4.1'
 gem 'devise', '~> 4.7'
 gem 'jquery-rails'
