@@ -1,48 +1,74 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>BookReview</title>
+    <title>Products</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-  <body>
-	  <nav class ="navbar navbar-default">
-		  <div class ="container">
-			  <div class =  "navbar-header">
-				  <%= link_to "Book Review", root_path, class: "navbar-brand"%>
-			  </div>
-			  <ul class = "nav navbar-nav">	  
-				  <li><%= link_to "Sign Up", new_user_registration_path%></li>
-				  <% if user_signed_in? %>
-					  <li> <%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
-				  <%else%>
-					  <li><%= link_to "Login In",new_user_session_path%></li>
-					   <%end%>
-			  </ul>
-			  <ul class = "nav navbar-nav navbar-right">
-				  <li class="dropdown">
-		<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Categories <span class="caret"></span></a>
-					  <ul class = "dropdown-menu" role ="menu">
-						  <% Category.all.each do |category|%>
-				 <li class = "<%= 'active' if params[:category] == category.name%>"><%= link_to category.name, books_path(category: category.name), class: "link" %> </li>
 
-                                             <%end%>
+        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+        <script src="js/umd/popper.min.js" type="text/javascript"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
-					  </ul>
-				    </li>
-				  <% if user_signed_in? %>
-                                     <li> <%= link_to "Add Book", new_book_path %></li>
-                                   <%end%>
+   </head>
+    <body>
+     <div class="App_Form">
+        <div class =  "navbar-header">
+          <img  width="120px" height="120px" src="/images/Logo.png">
+        </div>
+      
+        <ul class="searchbar">
+          <!--<input class="search_input" id="autocomplete" type="text" name="" placeholder="Search...">
+          <button type="button" class="bg-dark text-white">
+           <%#= link_to "Search",new_user_session_path%>
+          </button>-->
+          <%= form_tag products_path, :method => 'get' do %>
+  <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  </p>
+<% end %> 
+        </ul>
+    
+       
+        <ul class = "nav navbar-nav navbar-right">  
+         <% if !user_signed_in? %>
+         <button type="button" class="btn btn-info">
+          <%= link_to "Sign Up", new_user_registration_path%>
+         </button>
+         <button type="button" class="btn btn-success">
+           <%= link_to "Login In",new_user_session_path%>
+         </button> 
+         <%end%>
+        </ul>
 
-			  </ul>
-                  </div>
-	  </nav>
+        <ul class = "nav navbar-nav navbar-right">
+        <% if user_signed_in? %>
+          <button type="button"class="btn btn-info">
+                  <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+          </button>
+
+            <ul style="text-align: right;">
+            <button type="button" class="btn btn-dark"   align="right">
+                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Categories <span class="caret"></span></a>
+              <ul class = "dropdown-menu" role ="menu">
+                  <% Category.all.each do |category|%>
+               <li class = "<%= 'active' if params[:category] == category.name%>"><%= link_to category.name, root_path(category: category.name), class: "link" %> 
+               </li>
+                   <%end%>
+              </ul> 
+            </button>
+           </ul>
+        <%end%> 
+        </ul>
+  </div> 
    <p class="notice"><%= notice %></p>
    <p class="alert"><%= alert %></p>
     <%= yield %>
   </body>
+
 </html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Products</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+  <body>
+  <nav class="navbar navbar-expand-sm navbar-custom bg-primary">
+  <!--<nav class ="navbar navbar-default">-->
+		  <div class ="container">
+			  <div class =  "navbar-header">
+          <img  width="80px" height="80px" src="/images/Logo.png">
+			  </div>
+			  <ul class = "nav navbar-nav navbar-right">	
+         <% if !user_signed_in? %>
+         <button type="button" class="btn btn-dark">
+	        <li class="nav-item active"><%= link_to "Sign Up", new_user_registration_path%></li>
+         </button>
+         <button type="button" class="btn btn-dark">
+				   <%= link_to "Login In",new_user_session_path%>
+         </button> 
+         <%end%>
+			  </ul>
+
+				  <% if user_signed_in? %>
+            <ul class = "nav navbar-nav navbar-right">
+              <li class="dropdown" >
+            <button type="button" class="btn btn-dark">
+                   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Categories <span class="caret"></span></a>
+              <ul class = "dropdown-menu" role ="menu">
+                  <% Category.all.each do |category|%>
+               <li class = "<%= 'active' if params[:category] == category.name%>"><%= link_to category.name, new_user_session_path(category: category.name), class: "link" %> 
+               </li>
+                   <%end%>
+              </ul> 
+            </button>
+            <button type="button" class="btn btn-dark">
+                  <%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+            </button> 
+            </li>
+            </ul>
+          <%end%>
+      </div>
+  </nav>      
+   <p class="notice"><%= notice %></p>
+   <p class="alert"><%= alert %></p>
+    <%= yield %>
+  </body>
+
+</html>

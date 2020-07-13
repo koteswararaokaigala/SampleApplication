@@ -1,0 +1,30 @@
+
+<% if user_signed_in? %>
+<h4><b>User:  </b><%= current_user.email%>
+<p   align="right">
+<i class="fa" style="font-size:24px" align ="right">&#xf07a;</i>
+<%= @cart%>
+</p>
+</h4>
+	
+<div class ="App">
+<% @products.each do |product| %>
+  <div class ="Item">
+  <tr><td><%= link_to product.name,preview_product_path(product.id)  %></td></tr>
+ 
+  	<% if product.image.present? %>
+    <tr>
+    <td class="image-card"><%= link_to_image(product.image.variant(resize: "220x550").processed, preview_product_path(product.id)) %></td>
+  </tr>
+  <% end %>
+<tr>
+  <td><b>Price: </b><%= product.price  %></td>
+</tr>
+<tr>
+ <td><%= button_to "Add to Cart", add_to_cart_path(:product_id => product,:user_id=> current_user.id), :method => :post %></td>
+</tr>
+  
+  </div>
+<% end %>
+</div>
+<%end%>

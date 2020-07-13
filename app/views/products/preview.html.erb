@@ -1,0 +1,19 @@
+  <div class ="Privew_Item">
+  <h1><%=  @product.name  %></h1>
+ 
+  	<% if @product.image.present? %>
+    <tr>
+    <td class="image-card"><%= link_to_image(@product.image.variant(resize: "220x550").processed,root_path ) %></td>
+  </tr>
+  <% end %>
+
+<tr>
+  <td><b>Price: </b><%= @product.price  %></td>
+</tr>
+<tr>
+ <td><b>About:</b><%= @product.description %></td>
+</tr>
+<%= link_to "Back",root_path%>
+  </div>
+
+

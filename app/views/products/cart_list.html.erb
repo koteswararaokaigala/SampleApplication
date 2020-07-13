@@ -1,0 +1,10 @@
+
+<% @cart_list.each do |cart_list| %>
+<%@pro =  Product.find_by_id(cart_list.product_id)%>
+<%raise @pro.carts.inspect%>
+ <div class ="Item">
+
+  
+  
+  </div>
+<%end%>
